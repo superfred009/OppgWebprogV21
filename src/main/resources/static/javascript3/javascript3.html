@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ukesoppgave3</title>
+    <style>
+        body {margin: 20px;}
+        button {margin: 5px;}
+        .lblOppg1 {display: inline-block; width: 50px; margin: 2px;}
+        .lblOppg2 {display: inline-block; width: 170px; margin: 2px;}
+    </style>
+</head>
+<body>
+    <!-- Oppgave 1 -->
+    <h1>Vise navn og alder gjennom innskrevet data</h1>
+    <label for="navn" class="lblOppg1">Navn : </label>
+    <input type="text" id="navn"><br>
+    <label for="alder" class="lblOppg1">Alder : </label>
+    <input type="text" id="alder">
+    <span id="errorMeldingAlder" style="color: red;"></span><br>
+    <button onclick="visdata()">Vis navn og alder</button>
+    <div id="visnavnogalder"></div>
+
+    <script type="application/javascript">
+        const innNavn = document.getElementById('navn');
+        const innAlder = document.getElementById('alder');
+        const errorMeldingAlder = document.getElementById('errorMeldingAlder');
+
+        function visdata() {
+            errorMeldingAlder.innerText = '';
+            let alder = Number(innAlder.value);
+            let navn = innNavn.value;
+
+            if (isNaN(alder) || alder < 1) {
+                errorMeldingAlder.innerText = 'Du må skrive et tall større enn null'
+            } else {
+                document.getElementById('visnavnogalder').innerHTML = 'Navn: '+navn+'<br>'+'Alder: '+alder+' år'
+            }
+        }
+    </script>
+
+    <br><br><br>
+
+    <!-- Oppgave 2 -->
+    <h1>Konvertere mellom celsius og fahrenheit</h1>
+    <label for="ctilf" class="lblOppg2">Skriv grader i Celsius :</label>
+    <input type="text" id="ctilf">
+    <button onclick="konverterC()">Konverter C til F</button><br>
+    <label for="ftilc" class="lblOppg2">Skriv grader i Fahrenheit :</label>
+    <input type="text" id="ftilc">
+    <button onclick="konverterF()">Konverter F til C</button><br>
+    <div id="konverterprint" style="color: blue;"></div>
+
+    <script type="application/javascript">
+        const innC = document.getElementById('ctilf');
+        const innF = document.getElementById('ftilc');
+
+        function konverterC() {
+            let C = innC.value;
+            let F = (9/5)*C+32;
+            let ut = C+' grader Celsius er '+F+' grader i fahrenheit';
+            document.getElementById('konverterprint').innerHTML = ut;
+        }
+        function konverterF() {
+            let F = innF.value;
+            let C = (5/9)*(F-32);
+            let ut = F+' grader Fahrenheit er '+C+' grader i Celsius';
+            document.getElementById('konverterprint').innerHTML = ut;
+        }
+    </script>
+
+    <!-- Oppgave 3 -->
+    <h1>Kalkulator</h1>
+    <label for="tall1">Tall1:</label>
+    <input type="text" id="tall1">
+    <span id="errorTall" style="color: red;"></span><br>
+    <label for="tall1">Tall2:</label>
+    <input type="text" id="tall2"><br>
+    <button onclick="pluss()">+</button>
+    <button onclick="minus()">-</button>
+    <button onclick="gange()">*</button>
+    <button onclick="dele()">/</button>
+    <div id="svar"></div>
+
+    <script>
+        const innT1 = document.getElementById('tall1')
+        const innT2 = document.getElementById('tall2')
+        const errorMeldingTall = document.getElementById('errorTall')
+
+        function pluss() {
+            errorMeldingTall.innerText =''
+            let tall1 = Number(innT1.value)
+            let tall2 = Number(innT2.value)
+            let svar = ''
+            if (isNaN(tall1) || isNaN(tall2)) {
+                errorMeldingTall.innerText='Du må skrive tall i begge feltene'
+            } else {
+                svar = tall1 + tall2
+                document.getElementById('svar').innerHTML = tall1+' + '+tall2+' = '+svar
+            }
+        }
+        function minus() {
+            errorMeldingTall.innerText =''
+            let tall1 = Number(innT1.value)
+            let tall2 = Number(innT2.value)
+            let svar = ''
+            if (isNaN(tall1) || isNaN(tall2)) {
+                errorMeldingTall.innerText='Du må skrive tall i begge feltene'
+            } else {
+                svar = tall1 - tall2
+                document.getElementById('svar').innerHTML = tall1+' - '+tall2+' = '+svar
+            }
+        }
+        function gange() {
+            errorMeldingTall.innerText =''
+            let tall1 = Number(innT1.value)
+            let tall2 = Number(innT2.value)
+            let svar = ''
+            if (isNaN(tall1) || isNaN(tall2)) {
+                errorMeldingTall.innerText='Du må skrive tall i begge feltene'
+            } else {
+                svar = tall1 * tall2
+                document.getElementById('svar').innerHTML = tall1+' * '+tall2+' = '+svar
+            }
+        }
+        function dele() {
+            errorMeldingTall.innerText =''
+            let tall1 = Number(innT1.value)
+            let tall2 = Number(innT2.value)
+            let svar = ''
+            if (isNaN(tall1) || isNaN(tall2)) {
+                errorMeldingTall.innerText='Du må skrive tall i begge feltene'
+            } else {
+                svar = tall1 / tall2
+                document.getElementById('svar').innerHTML = tall1+' / '+tall2+' = '+svar
+            }
+        }
+    </script>
+
+    <!-- Oppgave 4 -->
+
+
+</body>
+</html>
