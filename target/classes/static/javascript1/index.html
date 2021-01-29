@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>oppgaver</title>
+    <script type="application/javascript">
+        function klikkKnapp() {
+            document.write("Hei verden");
+            alert("Hei verden");
+        }
+
+        function innKlikk(innData) {
+            let utData = "Du har skrevet: "+innData;
+            document.write(utData.fontcolor("blue"));
+            alert(utData.toUpperCase());
+            console.log(utData);
+        }
+
+        let teller = 0;
+        function nyKlikk() {
+            teller++;
+            console.log("Du har trykket knappen " + teller + " antall ganger");
+        }
+
+    </script>
+</head>
+<body>
+<button onclick="klikkKnapp()">Trykk meg</button>
+</br></br>
+<input type="text" onchange="innKlikk(this.value)">
+</br></br>
+<button onclick="nyKlikk()">trykk her</button>
+
+</body>
+</html>

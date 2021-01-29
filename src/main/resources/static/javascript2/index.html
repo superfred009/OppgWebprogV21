@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ukesoppgave 2</title>
+    <script type="application/javascript">
+
+        //oppretter en liste og fyller den inn med personobjekter
+        const personRegister = [];
+        const person1 = {
+            navn : "Line Jensen",
+            adresse : "Osloveien 82",
+            telefonnr : "12345678",
+            personnr : "10019912234"
+        };
+
+        const person2 = {
+            navn : "Ole Hansen",
+            adresse : "Askerveien 56",
+            telefonnr : "87654321",
+            personnr : "16059712534"
+        };
+
+        const person3 = {
+            navn : "Silje Johnsen",
+            adresse : "Bjølsengata 30",
+            telefonnr : "12345567",
+            personnr : "21120012434"
+        };
+
+        const person4 = {
+            navn : "Fredrik Neby",
+            adresse : "Hausmanns gate 19",
+            telefonnr : "98412456",
+            personnr : "16099812534"
+        };
+
+        personRegister.push(person1, person3, person2, person4);
+
+        function visPersonRegister() {
+            let ut = "<table><tr>" +
+                "<th>Navn</th><th>Adresse</th><th>Telefonnr</th><th>Personnr</th>" +
+                "</tr>";
+
+            //Tar annenhver og skriver ut som fet skrift
+            for (let i = 0; i < personRegister.length; i++) {
+                if (i % 2 === 0) {
+                    ut += "<tr><td><strong>"+personRegister[i].navn+
+                        "</strong></td><td><strong>"+personRegister[i].adresse+
+                        "</strong></td><td><strong>"+personRegister[i].telefonnr+
+                        "</strong></td><td><strong>"+personRegister[i].personnr+
+                        "</strong></td></tr>";
+                } else {
+                    ut += "<tr><td>"+personRegister[i].navn+
+                        "</td><td>"+personRegister[i].adresse+
+                        "</td><td>"+personRegister[i].telefonnr+
+                        "</td><td>"+personRegister[i].personnr+
+                        "</td></tr><tr></tr>";
+                }
+            }
+
+            ut += "</table>";
+            document.getElementById('personRegister').innerHTML=ut;
+
+            // Skriver ut kvinner som fet skrift, basert på personnummer
+            let ut3 = "<table><tr>" +
+                "<th>Navn</th><th>Adresse</th><th>Telefonnr</th><th>Personnr</th>" +
+                "</tr>";
+
+            for (let i = 0; i < personRegister.length; i++){
+               if (personRegister[i].personnr[8] % 2 === 0) {
+                   ut3 += "<tr><td><strong>"+personRegister[i].navn+
+                       "</strong></td><td><strong>"+personRegister[i].adresse+
+                       "</strong></td><td><strong>"+personRegister[i].telefonnr+
+                       "</strong></td><td><strong>"+personRegister[i].personnr+
+                       "</strong></td></tr>";
+               } else {
+                   ut3 += "<tr><td>"+personRegister[i].navn+
+                       "</td><td>"+personRegister[i].adresse+
+                       "</td><td>"+personRegister[i].telefonnr+
+                       "</td><td>"+personRegister[i].personnr+
+                       "</td></tr><tr></tr>";
+               }
+            }
+
+            ut3 += "</table>";
+            document.getElementById('personRegister2').innerHTML=ut3;
+
+            //sorterer listen alfabetisk etter navn
+            function compare(a, b) {
+                if (a.navn < b.navn) {
+                    return -1;
+                }
+                if (a.navn > b.navn) {
+                    return 1;
+                }
+                return 0;
+            }
+
+            const sortertListe = personRegister.sort(compare);
+            let ut2 = "<table><tr>" +
+                "<th>Navn</th><th>Adresse</th><th>Telefonnr</th>" +
+                "</tr>";
+            for (let person of sortertListe) {
+                ut2 += "<tr><td>"+person.navn+
+                    "</td><td>"+person.adresse+
+                    "</td><td>"+person.telefonnr+
+                    "</td></tr>";
+            }
+
+            ut2 += "</table>";
+            document.getElementById('sortertListe').innerHTML=ut2;
+        }
+
+    </script>
+</head>
+
+<body>
+    <button onclick="visPersonRegister()">Vis Personregister</button>
+    <div id="personRegister"></div>
+    <div id="personRegister2"></div>
+    <div id="sortertListe"></div>
+</body>
+</html>
