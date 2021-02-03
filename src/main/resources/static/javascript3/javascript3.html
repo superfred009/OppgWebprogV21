@@ -8,6 +8,7 @@
         button {margin: 5px;}
         .lblOppg1 {display: inline-block; width: 50px; margin: 2px;}
         .lblOppg2 {display: inline-block; width: 170px; margin: 2px;}
+        .lblOppg4 {display: inline-block; width: 70px; margin: 2px;}
     </style>
 </head>
 <body>
@@ -74,7 +75,7 @@
     <label for="tall1">Tall1:</label>
     <input type="text" id="tall1">
     <span id="errorTall" style="color: red;"></span><br>
-    <label for="tall1">Tall2:</label>
+    <label for="tall2">Tall2:</label>
     <input type="text" id="tall2"><br>
     <button onclick="pluss()">+</button>
     <button onclick="minus()">-</button>
@@ -82,7 +83,7 @@
     <button onclick="dele()">/</button>
     <div id="svar"></div>
 
-    <script>
+    <script type="application/javascript">
         const innT1 = document.getElementById('tall1')
         const innT2 = document.getElementById('tall2')
         const errorMeldingTall = document.getElementById('errorTall')
@@ -138,6 +139,34 @@
     </script>
 
     <!-- Oppgave 4 -->
+    <h1>Oppgave 4</h1>
+    <label for="navn1" class="lblOppg4">Navn:</label>
+    <input type="text" id="navn1"><br>
+    <label for="adresse1" class="lblOppg4">Adresse:</label>
+    <input type="text" id="adresse1"><br>
+    <label for="tlf1" class="lblOppg4">Telefonnr:</label>
+    <input type="text" id="tlf1"><br>
+    <button onclick="registrerPerson()">Registrer</button><br>
+    <button onclick="visPersonregister2()">Vis personregister</button>
+
+<script type="application/javascript">
+    const innNavn = document.getElementById('navn1')
+    const innAdresse = document.getElementById('adresse1')
+    const innTlf = document.getElementById('tlf1')
+    const personregister1 = []
+
+    function registrerPerson() {
+        const person1 = {
+            navn : innNavn,
+            adresse : innAdresse,
+            telefonnr : innTlf,
+        };
+        personregister1.push(person1)
+    }
+    function visPersonregister2() {
+
+    }
+</script>
 
 
 </body>
