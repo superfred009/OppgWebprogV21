@@ -139,7 +139,7 @@
     </script>
 
     <!-- Oppgave 4 -->
-    <h1>Oppgave 4</h1>
+    <h1>Registrer person og vise register</h1>
     <label for="navn1" class="lblOppg4">Navn:</label>
     <input type="text" id="navn1"><br>
     <label for="adresse1" class="lblOppg4">Adresse:</label>
@@ -148,25 +148,61 @@
     <input type="text" id="tlf1"><br>
     <button onclick="registrerPerson()">Registrer</button><br>
     <button onclick="visPersonregister2()">Vis personregister</button>
+    <div id="visRegister"></div>
 
-<script type="application/javascript">
-    const innNavn = document.getElementById('navn1')
-    const innAdresse = document.getElementById('adresse1')
-    const innTlf = document.getElementById('tlf1')
-    const personregister1 = []
+    <script type="application/javascript">
 
-    function registrerPerson() {
-        const person1 = {
-            navn : innNavn,
-            adresse : innAdresse,
-            telefonnr : innTlf,
-        };
-        personregister1.push(person1)
-    }
-    function visPersonregister2() {
+        const personregister1 = []
 
-    }
-</script>
+        function registrerPerson() {
+            const innNavn1 = document.getElementById('navn1').value
+            const innAdresse1 = document.getElementById('adresse1').value
+            const innTlf1 = document.getElementById('tlf1').value
+            const person1 = {
+                navnet : innNavn1,
+                adressen : innAdresse1,
+                telefonnret : innTlf1,
+            };
+            personregister1.push(person1)
+            console.log('Person registered')
+            console.log(personregister1)
+
+            document.getElementById('navn1').value=''
+            document.getElementById('adresse1').value=''
+            document.getElementById('tlf1').value=''
+        }
+        function visPersonregister2() {
+            let ut = "<table><tr>" +
+                "<th>Navn</th><th>Adresse</th><th>Telefonnr</th>" +
+                "</tr>"
+            for (let i = 0; i < personregister1.length; i++) {
+                ut += "<tr><td>"+personregister1[i].navnet+
+                    "</td><td>"+personregister1[i].adressen+
+                    "</td><td>"+personregister1[i].telefonnret+
+                    "</td></tr>"
+            }
+            ut += "</table>"
+            document.getElementById('visRegister').innerHTML=ut
+            console.log('Show register clicked')
+        }
+    </script>
+
+    <!-- Ekstraoppgave 1 -->
+    <h1>To-do liste</h1>
+    <label for="gjoremal">Skriv inn et gjøremål :</label>
+    <input type="text" id="gjoremal"> <!--onchange="leggTilGjoremal()"-->
+    <button onclick="leggTilGjoremal()">Legg til gjøremål</button>
+    <div id="gjoremalListe"></div>
+
+    <script type="application/javascript">
+        function leggTilGjoremal() {
+            const nyttGjoremal = document.getElementById('gjoremal').value
+            document.getElementById('gjoremalListe').insertAdjacentHTML('beforeend', '<input type="checkbox">'+nyttGjoremal+'<br>')
+            document.getElementById('gjoremal').value=''
+        }
+    </script>
+
+
 
 
 </body>
