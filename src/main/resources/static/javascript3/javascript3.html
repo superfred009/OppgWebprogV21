@@ -192,18 +192,16 @@
     <label for="gjoremal">Skriv inn et gjøremål :</label>
     <input type="text" id="gjoremal"> <!--onchange="leggTilGjoremal()"-->
     <button onclick="leggTilGjoremal()">Legg til gjøremål</button>
-    <div id="gjoremalListe"></div>
+    <div id="ufgjoremalListe">Uferdige gjøremål : <br></div>
+    <div id="fgjoremalListe">Ferdige gjøremål : <br></div>
 
     <script type="application/javascript">
         function leggTilGjoremal() {
             const nyttGjoremal = document.getElementById('gjoremal').value
-            document.getElementById('gjoremalListe').insertAdjacentHTML('beforeend', '<input type="checkbox">'+nyttGjoremal+'<br>')
+            document.getElementById('ufgjoremalListe').insertAdjacentHTML('beforeend', '<input type="checkbox">'+nyttGjoremal+'<br>')
             document.getElementById('gjoremal').value=''
         }
     </script>
-
-
-
 
 </body>
 </html>
