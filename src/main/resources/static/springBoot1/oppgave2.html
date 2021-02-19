@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave 2</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="application/javascript">
+        function initialise() {
+            $.get("/load", function(){
+                window.location.href = "oppgave2p2.html"
+            })
+        }
+    </script>
+</head>
+<body>
+    <button onclick="initialise()">Initialise</button>
+</body>
+</html>

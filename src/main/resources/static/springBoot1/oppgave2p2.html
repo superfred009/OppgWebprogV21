@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave2p2</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="application/javascript">
+        function calculate(){
+            const name = $("#inValuta").val()
+            const value = $("#inValue").val()
+            let obj = {
+                name : name,
+                value : value
+            }
+
+
+            $.get("/calc", obj, function (valueNOK){
+                if (isNaN(valueNOK) || value === ""){
+                    $("#output").text("feil input")
+                } else {
+                    $("#output").text("Din verdi i NOK er "+valueNOK)
+                }
+
+            })
+        }
+    </script>
+</head>
+<body>
+<div>
+    <label for="inValuta">Valuta:</label><input type="text" id="inValuta">
+</div>
+<div>
+    <label for="inValue">Verdi:</label><input type="text" id="inValue">
+</div>
+<button onclick="calculate()">Calculate</button>
+
+<div id="output"></div>
+
+</body>
+</html>

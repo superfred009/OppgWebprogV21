@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Motorvognregister</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="application/javascript">
+        function registrer(){
+            const inPersNr = $("#eierPersnr").val()
+            const inNavn = $("#eierNavn").val()
+            const inAdresse = $("#eierAdresse").val()
+            const inKjennetegn = $("#kjennetegn").val()
+            const inBilmerke = $("#bilmerke").val()
+            const inBiltype = $("#biltype").val()
+            let bilEier = {
+                persNr : inPersNr,
+                navn : inNavn,
+                adresse : inAdresse,
+                kjennetegn : inKjennetegn,
+                bilmerke : inBilmerke,
+                biltype : inBiltype
+            }
+
+            $.post("/lagre", bilEier, function (){
+                hent()
+            })
+            $("#eierPersnr").val("")
+            $("#eierNavn").val("")
+            $("#eierAdresse").val("")
+            $("#kjennetegn").val("")
+            $("#bilmerke").val("")
+            $("#biltype").val("")
+
+            $.get("/hent", function (data){
+                formaterData(data)
+            })
+
+            function formaterData(eiere) {
+                let ut = "<table><tr><th>Eiers personnummer</th><th>Eiers navn</th><th>Eiers adresse</th><th>Kjennetegn</th><th>Bilmerke</th><th>Biltype</th></tr>";
+                for (const eier of eiere) {
+                    ut+="<tr><td>"+eier.persNr+"</td><td>"+eier.navn+"</td><td>"+eier.adresse+"</td><td>"+eier.kjennetegn+"</td><td>"+eier.bilmerke+"</td><td>"+eier.biltype+"</td></tr>";
+                }
+                ut+="</table>";
+                $("#resultat").html(ut);
+            }
+        }
+        /*function slettBiler(){
+            $.delete("/slett", function(){
+                hent()
+            })
+        } */
+    </script>
+</head>
+<body>
+    <h1>Motorvognregister</h1>
+    <table>
+        <tr>
+            <td><label for="eierPersnr">Eiers personnummer</label></td>
+            <td><label for="eierNavn">Eiers navn</label></td>
+            <td><label for="eierAdresse">Eiers adresse</label></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="eierPersnr" required></td>
+            <td><input type="text" id="eierNavn" required></td>
+            <td><input type="text" id="eierAdresse" required></td>
+        </tr>
+        <tr>
+            <td><label for="kjennetegn">Kjennetegn</label></td>
+            <td><label for="bilmerke">Bilmerke</label></td>
+            <td><label for="biltype">Biltype</label></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="kjennetegn" required></td>
+            <td><input type="text" id="bilmerke" required></td>
+            <td><input type="text" id="biltype" required></td>
+        </tr>
+    </table>
+    <button onclick="registrer()">Registrer</button>
+    <div>
+        <label for="resultat">Alle bilene:</label>
+        <div id="resultat"></div>
+        <button onclick="slettBiler()">Slett alle</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oppgave1</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="application/javascript">
+        function hentTemp() {
+            const innMaaned = $("#innMaaned").val();
+
+            const url = "/hentTemp?innMaaned="+innMaaned;
+            $.get(url, function(utTemp){
+                if(utTemp !== 0){
+                    $("#result").text("Gjennomsnittstemperaturen i " + innMaaned.toLowerCase() + " var " + utTemp);
+                } else {
+                    $("#result").text("Jeg kjenner ikke igjen måneden du skrev inn");
+                }
+
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Oppgave1</h1>
+    <label for="innMaaned">Skriv inn måned :</label>
+    <input type="text" id="innMaaned">
+    <button onclick="hentTemp()">Vis temp</button>
+    <div id="result"></div>
+</body>
+</html>
