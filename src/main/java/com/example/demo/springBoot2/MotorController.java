@@ -23,7 +23,7 @@ public class MotorController {
         return alleEiere;
     }
 
-    @DeleteMapping("/slett")
+    @PostMapping("/slett")
     public void slette() {
         alleEiere.clear();
     }

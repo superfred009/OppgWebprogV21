@@ -14,14 +14,17 @@
             }
 
 
-            $.get("/calc", obj, function (valueNOK){
-                if (isNaN(valueNOK) || value === ""){
-                    $("#output").text("feil input")
-                } else {
-                    $("#output").text("Din verdi i NOK er "+valueNOK)
-                }
-
-            })
+            if (name === "" || value === ""){
+                $("#output").text("You need to fill both fields.");
+            } else {
+                $.get("/calc", obj, function (valueNOK){
+                    if (isNaN(valueNOK) || valueNOK === ""){
+                        $("#output").text("The data you entered is invalid");
+                    } else {
+                        $("#output").text("Your value in NOK is " + valueNOK);
+                    }
+                })
+            }
         }
     </script>
 </head>
