@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrer Motorvogn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="module" src="registrer.js"></script>
+</head>
+<body>
+<h1>Registrer en bil</h1>
+<div class="col-md-3">
+    <form class="form form-small">
+        <div class="form-group">
+            <label for="eierPersnr">Eiers personnummer</label>
+            <input type="text" class="form-control" id="eierPersnr">
+            <span id="persNrError"></span>
+        </div>
+        <div class="form-group">
+            <label for="eierNavn">Eiers navn</label>
+            <input type="text" class="form-control" id="eierNavn">
+            <span id="navnError"></span>
+        </div>
+        <div class="form-group">
+            <label for="eierAdresse">Eiers adresse</label>
+            <input type="text" class="form-control" id="eierAdresse">
+            <span id="adresseError"></span>
+        </div>
+        <div class="form-group">
+            <label for="kjennetegn">Kjennetegn</label>
+            <input type="text" class="form-control" id="kjennetegn">
+            <span id="kjennetegnError"></span>
+        </div>
+        <div class="form-group">
+            <label for="bilmerke">Bilmerke</label>
+            <div id="bilmerke" class="dropdown">
+
+            </div>
+            <span id="merkeError"></span>
+        </div>
+        <div class="form-group">
+            <label for="biltype">Biltype</label>
+            <div id="biltype" class="dropdown">
+
+            </div>
+            <span id="typeError"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" id="btnRegistrer">Registrer</button>
+        <button class="btn btn-secondary" id="btnAvbryt">Avbryt</button>
+        <span id="feilmelding" style="color: #ff0000"></span>
+    </form>
+</div>
+</body>
+</html>

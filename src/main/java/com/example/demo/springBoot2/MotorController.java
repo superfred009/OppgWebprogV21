@@ -1,6 +1,6 @@
 package com.example.demo.springBoot2;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,20 +11,35 @@ import java.util.List;
 @RestController
 public class MotorController {
 
-    public final List<MotorEier> alleEiere = new ArrayList<>();
+    @Autowired
+    MotorRepository repo;
+
+    public final List<Bil> bilRegister = new ArrayList<>();
+
+
+    @GetMapping("/hentBiler")
+    public List<Bil> hentBiler() {
+        return repo.hentBiler();
+    }
 
     @PostMapping("/lagre")
     public void lagreEier(MotorEier innEier) {
-        alleEiere.add(innEier);
+        repo.lagreBileier(innEier);
     }
 
     @GetMapping("/hent")
-    public List<MotorEier> hent() {
-        return alleEiere;
+    public List<MotorEier> hentEiere() {
+        return repo.hentMotorEiere();
     }
 
     @PostMapping("/slett")
     public void slette() {
-        alleEiere.clear();
+        repo.slettAlle();
     }
+
+    @GetMapping("/slettEn")
+    public void slettEn(String id){
+        repo.slettEn(id);
+    }
+
 }

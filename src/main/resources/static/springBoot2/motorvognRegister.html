@@ -5,43 +5,14 @@
     <title>Motorvognregister</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="application/javascript" src="motorvogn.js"></script>
+    <script type="module" src="motorvogn.js"></script>
 </head>
 <body>
     <h1>Motorvognregister</h1>
-    <div clss="container">
-        <form class="form form-small">
-            <div class="form-group">
-                <label for="eierPersnr">Eiers personnummer</label>
-                <input type="text" class="form-control" id="eierPersnr" required>
-            </div>
-            <div class="form-group">
-                <label for="eierNavn">Eiers navn</label>
-                <input type="text" class="form-control" id="eierNavn" required>
-            </div>
-            <div class="form-group">
-                <label for="eierAdresse">Eiers adresse</label>
-                <input type="text" class="form-control" id="eierAdresse" required>
-            </div>
-            <div class="form-group">
-                <label for="kjennetegn">Kjennetegn</label>
-                <input type="text" class="form-control" id="kjennetegn" required>
-            </div>
-            <div class="form-group">
-                <label for="bilmerke">Bilmerke</label>
-                <input type="text" class="form-control" id="bilmerke" required>
-            </div>
-            <div class="form-group">
-                <label for="biltype">Biltype</label>
-                <input type="text" class="form-control" id="biltype" required>
-            </div>
-            <button type="submit" class="btn btn-primary" onclick="registrer()">Registrer</button>
-            <span id="feilmelding" style="color: red"></span>
-        </form>
-    </div>
-    <div class="container">
+    <div class="container col-md-9">
         <label for="resultat">Alle bilene:</label>
         <div id="resultat"></div>
+        <button class="btn btn-primary" onclick="window.location.href='/springBoot2/registrer.html'">Registrer ny bil</button>
         <button class="btn btn-danger" onclick="slettBiler()">Slett alle</button>
     </div>
 </body>
