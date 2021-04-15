@@ -20,7 +20,10 @@ $(() => {
         }
 
         if(inputval(bilEier)) {
-            $.post("/lagre", bilEier, () => window.location.href="./motorvognRegister.html")
+            $.post("/lagre", bilEier, () => {
+                console.log("Bil registrert")
+                window.location.replace("./motorvognRegister.html");
+            })
             $("#eierPersnr").val("")
             $("#eierNavn").val("")
             $("#eierAdresse").val("")
@@ -30,7 +33,7 @@ $(() => {
         }
     })
 
-    $("#btnAvbryt").click(() => window.location.href="./motorvognRegister.html")
+    //$("#btnAvbryt").click(() => window.location.href="./motorvognRegister.html")
 });
 const hentAlleBiler = () => $.get("/hentBiler", biler => formaterBiler(biler));
 

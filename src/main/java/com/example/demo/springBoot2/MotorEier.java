@@ -1,6 +1,7 @@
 package com.example.demo.springBoot2;
 
 public class MotorEier {
+    private String id;
     private String persNr;
     private String navn;
     private String adresse;
@@ -8,13 +9,25 @@ public class MotorEier {
     private String bilmerke;
     private String biltype;
 
-    public MotorEier (String persNr, String navn, String adresse, String kjennetegn, String bilmerke, String biltype) {
+    public MotorEier (String id, String persNr, String navn, String adresse, String kjennetegn, String bilmerke, String biltype) {
+        this.id = id;
         this.persNr = persNr;
         this.navn = navn;
         this.adresse = adresse;
         this.kjennetegn = kjennetegn;
         this.bilmerke = bilmerke;
         this.biltype = biltype;
+    }
+
+    public MotorEier(){
+
+    }
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAdresse() {

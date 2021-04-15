@@ -1,43 +1,8 @@
-function registrer() {
+$(()=>{
+    hent()
+});
 
-    const inPersNr = $("#eierPersnr").val()
-    const inNavn = $("#eierNavn").val()
-    const inAdresse = $("#eierAdresse").val()
-    const inKjenne = $("#kjennetegn").val()
-    const inMerke = $("#bilmerke").val()
-    const inType = $("#biltype").val()
-
-    $("#feilmelding").html("")
-    let feilmelding = false
-    if(!inPersNr || !inNavn || !inAdresse || !inKjenne || !inMerke || !inType) {
-        $("#feilmelding").html("Du må fylle inn alle feltene")
-        feilmelding = true
-    }
-    if (feilmelding){
-        return
-    }
-
-    let bilEier = {
-        persNr: inPersNr,
-        navn: inNavn,
-        adresse: inAdresse,
-        kjennetegn: inKjenne,
-        bilmerke: inMerke,
-        biltype: inType
-    }
-
-    $.post("/lagre", bilEier, function () {
-        hent()
-    })
-    $("#eierPersnr").val("")
-    $("#eierNavn").val("")
-    $("#eierAdresse").val("")
-    $("#kjennetegn").val("")
-    $("#bilmerke").val("")
-    $("#biltype").val("")
-}
-
-function hent() {
+export function hent() {
     $.get("/hent", function (data) {
         formaterData(data)
     })
@@ -45,10 +10,12 @@ function hent() {
 
 function formaterData(eiere) {
     let ut = "<table class='table table-striped'><tr><th>Eiers personnummer</th><th>Eiers navn</th><th>Eiers adresse</th>" +
-        "<th>Kjennetegn</th><th>Bilmerke</th><th>Biltype</th></tr>";
+        "<th>Kjennetegn</th><th>Bilmerke</th><th>Biltype</th><th></th><th></th></tr>";
     for (const eier of eiere) {
         ut+="<tr><td>"+eier.persNr+"</td><td>"+eier.navn+"</td><td>"+eier.adresse+"</td>" +
-            "<td>"+eier.kjennetegn+"</td><td>"+eier.bilmerke+"</td><td>"+eier.biltype+"</td></tr>";
+            "<td>"+eier.kjennetegn+"</td><td>"+eier.bilmerke+"</td><td>"+eier.biltype+"</td>" +
+            "<td><button class='btn btn-primary' onclick='rediger( \"" + eier.id + "\")'>Rediger</button></td>" +
+            "<td><button class='btn btn-danger' onclick='slettEn( \"" + eier.id + "\")'>Slett</button></td></tr>";
     }
     ut+="</table>";
     $("#resultat").html(ut);
@@ -56,6 +23,17 @@ function formaterData(eiere) {
 
 function slettBiler(){
     $.post("/slett", function(){
-        $("#resultat").html("");
+        hent();
+    })
+}
+
+function rediger(id){
+
+}
+
+function slettEn(id){
+    let url = "/slettEn?id="+id;
+    $.get(url, function(){
+        hent();
     })
 }
