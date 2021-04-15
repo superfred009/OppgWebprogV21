@@ -6,11 +6,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="module" src="registrer.js"></script>
+    <style>
+        span{color: red;}
+    </style>
 </head>
 <body>
 <h1>Registrer en bil</h1>
 <div class="col-md-3">
-    <form class="form form-small">
+    <!--<form class="form form-small"> -->
         <div class="form-group">
             <label for="eierPersnr">Eiers personnummer</label>
             <input type="text" class="form-control" id="eierPersnr">
@@ -46,9 +49,8 @@
             <span id="typeError"></span>
         </div>
         <button type="submit" class="btn btn-primary" id="btnRegistrer">Registrer</button>
-        <button class="btn btn-secondary" id="btnAvbryt"><a href="motorvognRegister.html">Avbryt</a></button>
-        <span id="feilmelding" style="color: #ff0000"></span>
-    </form>
+        <button class="btn btn-secondary" id="btnAvbryt">Avbryt</button>
+    <!--</form>-->
 </div>
 </body>
 </html>

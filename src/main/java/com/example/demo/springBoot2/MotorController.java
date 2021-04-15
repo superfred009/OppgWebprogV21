@@ -42,4 +42,9 @@ public class MotorController {
         repo.slettEn(id);
     }
 
+    @PostMapping("/redigerEn")
+    public void redigerEn(MotorEier innEier){
+        repo.redigerEn(innEier);
+    }
+
 }

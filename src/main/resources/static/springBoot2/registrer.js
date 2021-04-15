@@ -33,7 +33,7 @@ $(() => {
         }
     })
 
-    //$("#btnAvbryt").click(() => window.location.href="./motorvognRegister.html")
+    $("#btnAvbryt").click(() => window.location.href="./motorvognRegister.html")
 });
 const hentAlleBiler = () => $.get("/hentBiler", biler => formaterBiler(biler));
 

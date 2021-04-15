@@ -39,4 +39,9 @@ public class MotorRepository {
         String sql = "DELETE FROM Motoreier WHERE id=?;";
         db.update(sql, id);
     }
+
+    public void redigerEn(MotorEier motorEier){
+        String sql = "UPDATE Motoreier SET persNr = ?, navn = ?, adresse = ?, kjennetegn = ?, bilmerke = ?, biltype = ? WHERE id=?;";
+        db.update(sql, motorEier.getPersNr(), motorEier.getAdresse(), motorEier.getNavn(), motorEier.getKjennetegn(), motorEier.getBilmerke(), motorEier.getBiltype());
+    }
 }
