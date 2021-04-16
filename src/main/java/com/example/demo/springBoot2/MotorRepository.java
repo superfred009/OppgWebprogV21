@@ -42,6 +42,13 @@ public class MotorRepository {
 
     public void redigerEn(MotorEier motorEier){
         String sql = "UPDATE Motoreier SET persNr = ?, navn = ?, adresse = ?, kjennetegn = ?, bilmerke = ?, biltype = ? WHERE id=?;";
-        db.update(sql, motorEier.getPersNr(), motorEier.getAdresse(), motorEier.getNavn(), motorEier.getKjennetegn(), motorEier.getBilmerke(), motorEier.getBiltype());
+        db.update(sql, motorEier.getPersNr(), motorEier.getAdresse(), motorEier.getNavn(), motorEier.getKjennetegn(), motorEier.getBilmerke(), motorEier.getBiltype(), motorEier.getId());
+    }
+
+    public MotorEier hentEnMotorvogn(int id) {
+        String sql = "SELECT * FROM Motoreier WHERE id = ?";
+        List<MotorEier> enMotorvogn = db.query(sql, new BeanPropertyRowMapper(MotorEier.class), id);
+        return enMotorvogn.get(0);
+
     }
 }

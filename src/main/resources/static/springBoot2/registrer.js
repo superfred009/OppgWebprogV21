@@ -24,10 +24,6 @@ $(() => {
                 console.log("Bil registrert")
                 window.location.replace("./motorvognRegister.html");
             })
-            $("#eierPersnr").val("")
-            $("#eierNavn").val("")
-            $("#eierAdresse").val("")
-            $("#kjennetegn").val("")
         } else {
             console.log("input mangler")
         }

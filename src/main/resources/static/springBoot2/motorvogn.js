@@ -38,7 +38,7 @@ const addEventListeners = eiere => {
     }
 }
 
-const rediger = id => window.location.href = "./rediger.html?" + id;
+const rediger = id => window.location.href = "./rediger.html?" + id
 
 const slettEn = id =>{
     let url = "/slettEn?id="+id;

@@ -1,8 +1,10 @@
 $(() => {
-    hentAlleBiler()
+    hentAlleBiler();
+    hentEnMotorvogn();
 
     $("#btnRediger").click(() =>{
 
+        const id = $("#id").val()
         const inPersNr = $("#eierPersnr").val()
         const inNavn = $("#eierNavn").val()
         const inAdresse = $("#eierAdresse").val()
@@ -11,6 +13,7 @@ $(() => {
         const inType = $("#valgtType").val()
 
         let bilEier = {
+            id: id,
             persNr: inPersNr,
             navn: inNavn,
             adresse: inAdresse,
@@ -29,7 +32,24 @@ $(() => {
         }
 
     })
+
+    $("#btnAvbryt").click(() => window.location.href = "./motorvognRegister.html");
 })
+
+const hentEnMotorvogn = () => {
+    const id = window.location.search.substring(1);
+    const url = "/hentEn?id=" + id;
+
+    $.get(url, data => {
+        $("#id").val(data.id)
+        $("#eierPersnr").val(data.persNr)
+        $("#eierNavn").val(data.navn)
+        $("#eierAdresse").val(data.adresse)
+        $("#kjennetegn").val(data.kjennetegn)
+        $("#bilmerke").val(data.bilmerke)
+        $("#biltype").val(data.biltype)
+    })
+}
 
 const hentAlleBiler = () => $.get("/hentBiler", biler => formaterBiler(biler));
 

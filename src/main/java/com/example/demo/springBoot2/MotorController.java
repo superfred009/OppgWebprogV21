@@ -47,4 +47,9 @@ public class MotorController {
         repo.redigerEn(innEier);
     }
 
+    @GetMapping("/hentEn")
+    public MotorEier hentEnMotorvogn(int id) {
+        return repo.hentEnMotorvogn(id);
+    }
+
 }
