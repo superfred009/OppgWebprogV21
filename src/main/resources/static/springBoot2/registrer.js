@@ -87,32 +87,32 @@ const inputval = bilEier => {
     let godkjent = true
     $("#persNrError").text("")
     if (bilEier.persNr === "") {
-        $("#persNrError").text("Du må velge en film")
+        $("#persNrError").text("Du må skrive et personnummer")
         godkjent = false
     }
     $("#navnError").text("")
     if (bilEier.navn === "") {
-        $("#navnError").text("Du må skrive et tall")
+        $("#navnError").text("Du må skrive et navn")
         godkjent = false
     }
     $("#adresseError").text("")
     if (bilEier.adresse === "") {
-        $("#adresseError").text("Du må skrive et fornavn")
+        $("#adresseError").text("Du må skrive en adresse")
         godkjent = false
     }
     $("#kjennetegnError").text("")
     if (bilEier.kjennetegn === "") {
-        $("#kjennetegnError").text("Du må skrive et fornavn")
+        $("#kjennetegnError").text("Du må skrive et kjennetegn")
         godkjent = false
     }
     $("#merkeError").text("")
-    if (bilEier.bilmerke === "") {
-        $("#merkeError").text("Du må skrive et fornavn")
+    if (bilEier.bilmerke === "Velg merke") {
+        $("#merkeError").text("Du må velge et merke")
         godkjent = false
     }
     $("#typeError").text("")
     if (bilEier.biltype === "") {
-        $("#typeError").text("Du må skrive et fornavn")
+        $("#typeError").text("Du må velge en type")
         godkjent = false
     }
     return godkjent;
