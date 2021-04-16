@@ -1,5 +1,6 @@
 $(() => {
-    hentAlleBiler()
+    setupErrorHandler();
+    hentAlleBiler();
 
     $("#btnRegistrer").click(() => {
 
@@ -31,6 +32,15 @@ $(() => {
 
     $("#btnAvbryt").click(() => window.location.href="./motorvognRegister.html")
 });
+
+const setupErrorHandler = () => {
+    $.ajaxSetup({
+        error: (data) => {
+            $("#error").text(data.responseJSON.message)
+        }
+    })
+}
+
 const hentAlleBiler = () => $.get("/hentBiler", biler => formaterBiler(biler));
 
 const formaterBiler = biler => {

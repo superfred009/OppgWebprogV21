@@ -1,4 +1,5 @@
 $(() => {
+    setupErrorHandler();
     hentAlleBiler();
     hentEnMotorvogn();
 
@@ -35,6 +36,14 @@ $(() => {
 
     $("#btnAvbryt").click(() => window.location.href = "./motorvognRegister.html");
 })
+
+const setupErrorHandler = () => {
+    $.ajaxSetup({
+        error: (data) => {
+            $("#error").text(data.responseJSON.message)
+        }
+    })
+}
 
 const hentEnMotorvogn = () => {
     const id = window.location.search.substring(1);

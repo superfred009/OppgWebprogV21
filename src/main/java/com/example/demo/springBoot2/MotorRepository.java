@@ -1,5 +1,7 @@
 package com.example.demo.springBoot2;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,45 +12,89 @@ import java.util.List;
 @Repository
 public class MotorRepository {
 
+    private Logger logger = LoggerFactory.getLogger(MotorRepository.class);
+
     @Autowired
     private JdbcTemplate db;
 
-    public void lagreBileier(MotorEier motorEier) {
+    public boolean lagreBileier(MotorEier motorEier) {
         String sql = "INSERT INTO Motoreier(persNr, navn, adresse, kjennetegn, bilmerke, biltype) VALUES(?,?,?,?,?,?)";
-        db.update(sql, motorEier.getPersNr(), motorEier.getNavn(), motorEier.getAdresse(), motorEier.getKjennetegn(), motorEier.getBilmerke(), motorEier.getBiltype());
+        try {
+            db.update(sql, motorEier.getPersNr(), motorEier.getNavn(), motorEier.getAdresse(), motorEier.getKjennetegn(), motorEier.getBilmerke(), motorEier.getBiltype());
+            return true;
+        } catch (Exception e) {
+            logger.error("Kunne ikke lagre motorvogn" + e);
+            return false;
+        }
     }
 
     public List<MotorEier> hentMotorEiere() {
         String sql = "SELECT * FROM Motoreier";
-        List<MotorEier> alleEiere = db.query(sql, new BeanPropertyRowMapper(MotorEier.class));
-        return alleEiere;
+        try {
+            List<MotorEier> alleEiere = db.query(sql, new BeanPropertyRowMapper(MotorEier.class));
+            return alleEiere;
+        } catch (Exception e) {
+            logger.error("Kunne ikke hente motorvogner" + e);
+            return null;
+        }
     }
 
     public List<Bil> hentBiler(){
         String sql = "SELECT * FROM Bil";
-        List<Bil> alleBiler = db.query(sql, new BeanPropertyRowMapper(Bil.class));
-        return alleBiler;
+        try {
+            List<Bil> alleBiler = db.query(sql, new BeanPropertyRowMapper(Bil.class));
+            return alleBiler;
+        } catch (Exception e) {
+            logger.error("Kunne ikke hente biler" + e);
+            return null;
+        }
+
     }
 
-    public void slettAlle() {
+    public boolean slettAlle() {
         String sql = "DELETE FROM Motoreier";
-        db.update(sql);
+        try {
+            db.update(sql);
+            return true;
+        } catch (Exception e) {
+            logger.error("Kunne ikke slette alle");
+            return false;
+        }
     }
 
-    public void slettEn(String id){
+    public boolean slettEn(String id){
         String sql = "DELETE FROM Motoreier WHERE id=?;";
-        db.update(sql, id);
+        try {
+            db.update(sql, id);
+            return true;
+        } catch (Exception e){
+            logger.error("Kunne ikke slette en");
+            return false;
+        }
+
     }
 
-    public void redigerEn(MotorEier motorEier){
+    public boolean redigerEn(MotorEier motorEier){
         String sql = "UPDATE Motoreier SET persNr = ?, navn = ?, adresse = ?, kjennetegn = ?, bilmerke = ?, biltype = ? WHERE id=?;";
-        db.update(sql, motorEier.getPersNr(), motorEier.getAdresse(), motorEier.getNavn(), motorEier.getKjennetegn(), motorEier.getBilmerke(), motorEier.getBiltype(), motorEier.getId());
+        try {
+            db.update(sql, motorEier.getPersNr(), motorEier.getAdresse(), motorEier.getNavn(), motorEier.getKjennetegn(), motorEier.getBilmerke(), motorEier.getBiltype(), motorEier.getId());
+            return true;
+        } catch (Exception e){
+            logger.error("Kunne ikke redigere motorvognen");
+            return false;
+        }
+
+
     }
 
     public MotorEier hentEnMotorvogn(int id) {
         String sql = "SELECT * FROM Motoreier WHERE id = ?";
-        List<MotorEier> enMotorvogn = db.query(sql, new BeanPropertyRowMapper(MotorEier.class), id);
-        return enMotorvogn.get(0);
-
+        try {
+            List<MotorEier> enMotorvogn = db.query(sql, new BeanPropertyRowMapper(MotorEier.class), id);
+            return enMotorvogn.get(0);
+        } catch (Exception e) {
+            logger.error("Kunne ikke hente motorvognen");
+            return null;
+        }
     }
 }

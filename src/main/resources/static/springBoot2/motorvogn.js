@@ -1,5 +1,6 @@
 $(()=>{
-    hent()
+    setupErrorHandler();
+    hent();
 
     $("#btnRegistrerNy").click(() => window.location.href="./registrer.html")
 
@@ -9,6 +10,14 @@ $(()=>{
         })
     })
 });
+
+const setupErrorHandler = () => {
+    $.ajaxSetup({
+        error: (data) => {
+            $("#error").text(data.responseJSON.message)
+        }
+    })
+}
 
 const hent = () => {
     $.get("/hent", function (data) {
