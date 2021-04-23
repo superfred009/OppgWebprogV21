@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="module" src="login.js"></script>
+    <style>
+      .error{
+        color: red
+      }
+    </style>
+</head>
+<body>
+    <h1>Logg inn</h1>
+    <div class="container col-md-3">
+      <div class="form-group">
+        <div id="error" class="error"></div>
+        <label for="brukernavn">Brukernavn</label>
+        <input type="text" id="brukernavn" class="form-control">
+        <label for="passord">Passsord</label>
+        <input type="text" id="passord" class="form-control">
+      </div>
+      <button class="btn btn-primary" id="loggeInn">Logg inn</button>
+      <button class="btn btn-secondary" id="avbryt">Avbryt</button>
+    </div>
+</body>
+</html>

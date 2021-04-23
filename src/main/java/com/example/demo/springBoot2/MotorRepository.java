@@ -17,6 +17,20 @@ public class MotorRepository {
     @Autowired
     private JdbcTemplate db;
 
+    public boolean sjekkBruker (Bruker bruker){
+        String sql =  "SELECT COUNT(*) FROM Brukere WHERE brukernavn=? AND passord=?";
+        try {
+            int antall = db.queryForObject(sql, Integer.class, bruker.getBrukernavn(), bruker.getPassord());
+            if (antall>0){
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            logger.error("Feil i sjekkBruker : "+e);
+            return false;
+        }
+    }
+
     public boolean lagreBileier(MotorEier motorEier) {
         String sql = "INSERT INTO Motoreier(persNr, navn, adresse, kjennetegn, bilmerke, biltype) VALUES(?,?,?,?,?,?)";
         try {

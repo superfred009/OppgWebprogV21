@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,37 @@ public class MotorController {
 
     @Autowired
     MotorRepository repo;
+
+    @Autowired
+    private HttpSession session;
+
+    @PostMapping("/login")
+    public boolean login(Bruker bruker){
+        if(repo.sjekkBruker(bruker)){
+            session.setAttribute("Innlogget", bruker);
+            return true;
+        }
+        return false;
+    }
+
+    @GetMapping("/validate")
+    public boolean validateUser() {
+        return session.getAttribute("Innlogget")!=null;
+    }
+
+    @GetMapping("/innlogget")
+    public boolean hentInnlogget (HttpServletResponse res) throws IOException {
+        if(session.getAttribute("Innlogget")!=null){
+            return true;
+        }
+        res.sendError(HttpStatus.NOT_FOUND.value());
+        return false;
+    }
+
+    @PostMapping("/logout")
+    public void logout() {
+        session.removeAttribute("Innlogget");
+    }
 
     @GetMapping("/hentBiler")
     public List<Bil> hentBiler(HttpServletResponse res) throws IOException {
