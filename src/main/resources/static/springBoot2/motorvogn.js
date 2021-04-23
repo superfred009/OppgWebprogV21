@@ -1,6 +1,5 @@
 $(()=>{
     setupErrorHandler();
-    hent();
     valider()
 });
 
@@ -11,8 +10,10 @@ function valider() {
                 "        <button class='btn btn-danger' id='btnSlettAlle'>Slett alle</button>" +
                 "       <button class='btn btn-primary' id='loggUt'>Logg Ut</button>"
             $("#buttons").html(ut)
+            hentInnlogget()
         } else {
             $("#buttons").html("<button class='btn btn-primary' id='loggInn'>Logg inn</button>")
+            hentUtlogget()
         }
         eventlistener()
     })
@@ -26,13 +27,19 @@ const setupErrorHandler = () => {
     })
 }
 
-const hent = () => {
+const hentInnlogget = () => {
     $.get("/hent", function (data) {
-        formaterData(data)
+        formaterData1(data)
     })
 }
 
-const formaterData = eiere => {
+const hentUtlogget = () => {
+    $.get("/hent", function (data) {
+        formaterData2(data)
+    })
+}
+
+const formaterData1 = eiere => {
     let ut = "<table class='table table-striped'><tr><th>Eiers personnummer</th><th>Eiers navn</th><th>Eiers adresse</th>" +
         "<th>Kjennetegn</th><th>Bilmerke</th><th>Biltype</th><th></th><th></th></tr>";
     for (const eier of eiere) {
@@ -45,6 +52,17 @@ const formaterData = eiere => {
     $("#resultat").html(ut);
 
     addEventListeners(eiere);
+}
+
+const formaterData2 = eiere => {
+    let ut = "<table class='table table-striped'><tr><th>Eiers personnummer</th><th>Eiers navn</th><th>Eiers adresse</th>" +
+        "<th>Kjennetegn</th><th>Bilmerke</th><th>Biltype</th></tr>";
+    for (const eier of eiere) {
+        ut+="<tr><td>"+eier.persNr+"</td><td>"+eier.navn+"</td><td>"+eier.adresse+"</td>" +
+            "<td>"+eier.kjennetegn+"</td><td>"+eier.bilmerke+"</td><td>"+eier.biltype+"</td>";
+    }
+    ut+="</table>";
+    $("#resultat").html(ut);
 }
 
 const addEventListeners = eiere => {
