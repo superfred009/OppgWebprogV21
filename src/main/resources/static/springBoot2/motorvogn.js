@@ -76,7 +76,7 @@ const eventlistener = () => {
     $("#btnRegistrerNy").on("click",() => window.location.href="./registrer.html")
     $("#btnSlettAlle").on("click",() => {
         $.post("/slett", function(){
-            hent();
+            hentInnlogget();
         })
     })
     $("#loggUt").on("click", () => {
@@ -88,6 +88,6 @@ const rediger = id => window.location.href = "./rediger.html?" + id
 const slettEn = id =>{
     let url = "/slettEn?id="+id;
     $.get(url, () => {
-        hent();
+        hentInnlogget();
     })
 }
