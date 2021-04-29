@@ -1,4 +1,5 @@
 $(()=>{
+    lagAdmin()
     setupErrorHandler();
     valider()
 });
@@ -90,4 +91,8 @@ const slettEn = id =>{
     $.get(url, () => {
         hentInnlogget();
     })
+}
+
+const lagAdmin = () => {
+    $.post("/lagAdmin")
 }

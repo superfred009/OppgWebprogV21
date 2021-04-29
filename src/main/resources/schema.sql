@@ -15,6 +15,6 @@ CREATE TABLE Bil (
 );
 CREATE TABLE Brukere (
     brukernavn VARCHAR(25) NOT NULL,
-    passord VARCHAR(25) NOT NULL,
+    passord VARCHAR(255) NOT NULL,
     PRIMARY KEY (brukernavn)
 );

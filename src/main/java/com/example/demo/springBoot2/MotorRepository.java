@@ -1,5 +1,6 @@
 package com.example.demo.springBoot2;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,38 @@ public class MotorRepository {
     @Autowired
     private JdbcTemplate db;
 
-    public boolean sjekkBruker (Bruker bruker){
-        String sql =  "SELECT COUNT(*) FROM Brukere WHERE brukernavn=? AND passord=?";
+    private String krypterPassord (String passord) {
+        String kryptertPassord = BCrypt.hashpw(passord, BCrypt.gensalt(12));
+        return kryptertPassord;
+    }
+    private boolean sjekkPassord (String passord, String hashPassord) {
+        boolean ok = BCrypt.checkpw(passord, hashPassord);
+        return ok;
+    }
+
+    public boolean lagreBruker(Bruker bruker) {
+        String hash = krypterPassord(bruker.getPassord());
+        String sql = "INSERT INTO Brukere (brukernavn, passord) VALUES(?,?)";
         try {
-            int antall = db.queryForObject(sql, Integer.class, bruker.getBrukernavn(), bruker.getPassord());
-            if (antall>0){
-                return true;
-            }
+            db.update(sql, bruker.getBrukernavn(), hash);
+            return true;
+        } catch (Exception e) {
+            logger.error("Feil i lagre bruker : "+e);
             return false;
+        }
+    }
+
+    public boolean sjekkBruker (Bruker bruker){
+        String sql =  "SELECT * FROM Brukere WHERE brukernavn = ?";
+        try {
+            Bruker dbBruker = db.queryForObject(sql, BeanPropertyRowMapper.newInstance(Bruker.class), bruker.getBrukernavn());
+            return sjekkPassord(bruker.getPassord(), dbBruker.getPassord());
         } catch (Exception e) {
             logger.error("Feil i sjekkBruker : "+e);
             return false;
         }
     }
+
 
     public boolean lagreBileier(MotorEier motorEier) {
         String sql = "INSERT INTO Motoreier(persNr, navn, adresse, kjennetegn, bilmerke, biltype) VALUES(?,?,?,?,?,?)";

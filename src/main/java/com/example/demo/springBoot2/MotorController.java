@@ -140,4 +140,10 @@ public class MotorController {
         return enEier;
     }
 
+    @PostMapping("/lagAdmin")
+    public void lagAdmin() {
+        Bruker admin = new Bruker("Admin", "AdminPassord123");
+        repo.lagreBruker(admin);
+    }
+
 }

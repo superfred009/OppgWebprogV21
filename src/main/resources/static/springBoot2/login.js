@@ -19,3 +19,9 @@ const login = () => {
             $("#error").text("Serverveil - prøv igjen senere")
         })
 }
+
+$("#passord").keyup((event) =>{
+    if (event.keyCode === 13) {
+        $("#loggeInn").click()
+    }
+})
