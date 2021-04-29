@@ -21,6 +21,7 @@ public class MotorController {
     @Autowired
     private HttpSession session;
 
+
     @PostMapping("/login")
     public boolean login(Bruker bruker){
         if(repo.sjekkBruker(bruker)){
@@ -138,12 +139,6 @@ public class MotorController {
             res.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Det skjedde en feil, prøv igjen senere");
         }
         return enEier;
-    }
-
-    @PostMapping("/lagAdmin")
-    public void lagAdmin() {
-        Bruker admin = new Bruker("Admin", "AdminPassord123");
-        repo.lagreBruker(admin);
     }
 
 }
